@@ -8,6 +8,7 @@ function handleTouchStart(event) {
 
   // get the first article element
   const currentCard = event.target.closest("article");
+  if(!currentCard) return;
 
   // get initial position of mouse or finger when the touch starts
   const initialX = event.pageX ?? event.touches[0].pageX;

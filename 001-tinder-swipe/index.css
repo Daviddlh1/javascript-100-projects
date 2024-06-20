@@ -147,6 +147,7 @@ footer {
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             opacity: 0;
             width: fit-content;
+            transition: opacity ease 0.3s;
 
             &.nope {
                 right: 16px;
