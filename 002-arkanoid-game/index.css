@@ -8,4 +8,5 @@ canvas {
     border-bottom: transparent;
     background: #000;
     margin: 0 auto;
+    background: url('./sprites/bkg.png') repeat;
 }
