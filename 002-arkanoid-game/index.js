@@ -68,6 +68,14 @@ function ballMovement() {
     }
 
     //bounce on the paddle
+    if(
+        ballY + dy > canvas.height - ballRadius - paddleHeight &&
+        ballX > paddleX
+    ) {
+        if(ballX < paddleX + paddleWidth) {
+            dy = -dy;
+        }
+    }
 
     // game over
     if(ballY + dy > canvas.height - ballRadius) {
@@ -80,7 +88,19 @@ function ballMovement() {
     ballY += dy;
 }
 
-function paddleMovement() {}
+function paddleMovement() {
+    if(rightPressed) {
+        paddleX += paddleDx;
+        if(paddleX + paddleWidth > canvas.width) {
+            paddleX = canvas.width - paddleWidth;
+        }
+    } else if(leftPressed) {
+        paddleX -= paddleDx;
+        if(paddleX < 0) {
+            paddleX = 0;
+        }
+    }
+}
 
 function cleanCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -91,15 +111,26 @@ function initEvents() {
     document.addEventListener('keyup', handleKeyUp);
     
     function handleKeyDown(event) {
-
+        const { key } = event;
+        if(key === 'Right' || key === 'ArrowRight') {
+            rightPressed = true;
+        } else {
+            leftPressed = true;
+        }
     }
 
     function handleKeyUp(event) {
-
+        const { key } = event;
+        if(key === 'Right' || key === 'ArrowRight') {
+            rightPressed = false;
+        } else {
+            leftPressed = false;
+        }
     }
 }
 
 function draw() {
+    console.log(rightPressed, leftPressed)
     // draw the elements
     cleanCanvas();
     drawBall();
@@ -115,3 +146,4 @@ function draw() {
 }
 
 draw();
+initEvents();
